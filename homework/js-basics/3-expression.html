@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-表达式</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #9C27B0;
+            padding-bottom: 10px;
+        }
+        .section {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #9C27B0;
+        }
+        .code {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        button {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #7B1FA2;
+        }
+        .result {
+            background: #f3e5f5;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #7B1FA2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 JavaScript 表达式</h1>
+
+        <div class="section">
+            <h3>1. 算术表达式</h3>
+            <div class="code">
+<pre>var a = 10, b = 3;
+console.log(a + b);   // 加法: 13
+console.log(a - b);   // 减法: 7
+console.log(a * b);   // 乘法: 30
+console.log(a / b);   // 除法: 3.333...
+console.log(a % b);   // 取余: 1
+console.log(a ** b);  // 幂运算: 1000</pre>
+            </div>
+            <button onclick="demoArithmetic()">运行</button>
+            <div class="result" id="r1"></div>
+        </div>
+
+        <div class="section">
+            <h3>2. 赋值表达式</h3>
+            <div class="code">
+<pre>var x = 10;
+x += 5;    // x = 15
+x -= 3;    // x = 12
+x *= 2;    // x = 24
+x /= 4;    // x = 6
+x %= 4;    // x = 2</pre>
+            </div>
+            <button onclick="demoAssignment()">运行</button>
+            <div class="result" id="r2"></div>
+        </div>
+
+        <div class="section">
+            <h3>3. 比较表达式（返回布尔值）</h3>
+            <div class="code">
+<pre>var a = 5, b = '5';
+console.log(a == b);   // 相等（值）: true
+console.log(a === b);  // 严格相等: false
+console.log(a != b);   // 不等: false
+console.log(a !== b);  // 严格不等: true
+console.log(a > 3);    // 大于: true
+console.log(a <= 5);   // 小于等于: true</pre>
+            </div>
+            <button onclick="demoComparison()">运行</button>
+            <div class="result" id="r3"></div>
+        </div>
+
+        <div class="section">
+            <h3>4. 逻辑表达式</h3>
+            <div class="code">
+<pre>var x = true, y = false;
+console.log(x && y);  // 逻辑与: false
+console.log(x || y);  // 逻辑或: true
+console.log(!x);      // 逻辑非: false
+
+// 短路运算
+var name = null;
+var result = name || "默认值";  // "默认值"</pre>
+            </div>
+            <button onclick="demoLogical()">运行</button>
+            <div class="result" id="r4"></div>
+        </div>
+
+        <div class="section">
+            <h3>5. 条件表达式（三元运算符）</h3>
+            <div class="code">
+<pre>var age = 20;
+var status = age >= 18 ? "成年人" : "未成年人";
+console.log(status);  // "成年人"</pre>
+            </div>
+            <button onclick="demoTernary()">运行</button>
+            <div class="result" id="r5"></div>
+        </div>
+
+        <div class="section">
+            <h3>6. 字符串表达式</h3>
+            <div class="code">
+<pre>var firstName = "张";
+var lastName = "三";
+var fullName = firstName + lastName;  // "张三"
+
+var age = 25;
+var info = "年龄：" + age;  // "年龄：25"
+
+// 模板字符串（ES6）
+var template = `姓名：${fullName}，年龄：${age}`;</pre>
+            </div>
+            <button onclick="demoString()">运行</button>
+            <div class="result" id="r6"></div>
+        </div>
+
+        <div class="section">
+            <h3>7. 自增/自减表达式</h3>
+            <div class="code">
+<pre>var count = 5;
+console.log(count++);  // 5 (先返回，后自增)
+console.log(count);   // 6
+
+var count2 = 5;
+console.log(++count2); // 6 (先自增，后返回)
+console.log(--count2); // 5 (自减)</pre>
+            </div>
+            <button onclick="demoIncrement()">运行</button>
+            <div class="result" id="r7"></div>
+        </div>
+    </div>
+
+    <script>
+        function demoArithmetic() {
+            var a = 10, b = 3;
+            var results = [
+                a + " + " + b + " = " + (a + b),
+                a + " - " + b + " = " + (a - b),
+                a + " * " + b + " = " + (a * b),
+                a + " / " + b + " = " + (a / b).toFixed(2),
+                a + " % " + b + " = " + (a % b),
+                a + " ** " + b + " = " + (a ** b)
+            ];
+            document.getElementById('r1').innerHTML = results.join("<br>");
+        }
+
+        function demoAssignment() {
+            var x = 10;
+            var results = [
+                "初始值 x = " + x,
+                "x += 5 后: " + (x += 5),
+                "x -= 3 后: " + (x -= 3),
+                "x *= 2 后: " + (x *= 2),
+                "x /= 4 后: " + (x /= 4),
+                "x %= 4 后: " + (x %= 4)
+            ];
+            document.getElementById('r2').innerHTML = results.join("<br>");
+        }
+
+        function demoComparison() {
+            var a = 5, b = '5';
+            var results = [
+                a + " == " + b + " : " + (a == b) + " (值相等)",
+                a + " === " + b + " : " + (a === b) + " (严格相等)",
+                a + " != " + b + " : " + (a != b),
+                a + " !== " + b + " : " + (a !== b),
+                a + " > 3 : " + (a > 3),
+                a + " <= 5 : " + (a <= 5)
+            ];
+            document.getElementById('r3').innerHTML = results.join("<br>");
+        }
+
+        function demoLogical() {
+            var x = true, y = false;
+            var name = null;
+            var result = name || "默认值";
+            var results = [
+                "true && false = " + (x && y),
+                "true || false = " + (x || y),
+                "!true = " + (!x),
+                "null || '默认值' = " + result + " (短路运算)"
+            ];
+            document.getElementById('r4').innerHTML = results.join("<br>");
+        }
+
+        function demoTernary() {
+            var age = 20;
+            var status = age >= 18 ? "成年人" : "未成年人";
+            document.getElementById('r5').innerHTML = "age = " + age + " → " + status;
+        }
+
+        function demoString() {
+            var firstName = "张";
+            var lastName = "三";
+            var fullName = firstName + lastName;
+            var age = 25;
+            var template = `姓名：${fullName}，年龄：${age}`;
+            var results = [
+                "字符串拼接: " + firstName + lastName + " = " + fullName,
+                "数字转字符串: '年龄：' + 25 = " + ("年龄：" + age),
+                "模板字符串: " + template
+            ];
+            document.getElementById('r6').innerHTML = results.join("<br>");
+        }
+
+        function demoIncrement() {
+            var count = 5;
+            var results = [
+                "count = " + count,
+                "count++ 返回: " + (count++) + "，现在 count = " + count,
+                "++count 返回: " + (++count) + "，现在 count = " + count,
+                "--count 返回: " + (--count) + "，现在 count = " + count
+            ];
+            document.getElementById('r7').innerHTML = results.join("<br>");
+        }
+    </script>
+</body>
+</html>

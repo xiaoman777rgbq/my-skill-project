@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-变量定义</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .example {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+        .code {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .result {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 变量定义</h1>
+
+        <div class="example">
+            <h3>1. 使用 var 声明变量（ES5）</h3>
+            <p>var 是函数作用域，存在变量提升</p>
+            <div class="code">
+<pre>var name = "小明";
+var age = 18;
+var isStudent = true;
+console.log(name, age, isStudent);</pre>
+            </div>
+            <button onclick="demoVar()">运行示例</button>
+            <div class="result" id="result1"></div>
+        </div>
+
+        <div class="example">
+            <h3>2. 使用 let 声明变量（ES6）</h3>
+            <p>let 是块级作用域，不能重复声明</p>
+            <div class="code">
+<pre>let score = 95;
+let grade = 'A';
+console.log("成绩:", score, "等级:", grade);</pre>
+            </div>
+            <button onclick="demoLet()">运行示例</button>
+            <div class="result" id="result2"></div>
+        </div>
+
+        <div class="example">
+            <h3>3. 使用 const 声明常量（ES6）</h3>
+            <p>const 声明后不能重新赋值，且必须初始化</p>
+            <div class="code">
+<pre>const PI = 3.14159;
+const APP_NAME = "我的应用";
+// PI = 3.14; // 错误！不能重新赋值</pre>
+            </div>
+            <button onclick="demoConst()">运行示例</button>
+            <div class="result" id="result3"></div>
+        </div>
+
+        <div class="example">
+            <h3>4. 变量命名规则</h3>
+            <div class="code">
+<pre>// 合法命名
+var userName = "张三";      // 驼峰命名
+var $price = 99.9;          // 可以用$
+var _private = "私有";      // 可以用_
+var user2 = "李四";         // 数字不能在开头
+
+// 不合法
+// var 2name = "错误";      // 不能以数字开头
+// var my-name = "错误";    // 不能用中划线</pre>
+            </div>
+            <button onclick="demoNaming()">运行示例</button>
+            <div class="result" id="result4"></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. var 演示
+        function demoVar() {
+            var name = "小明";
+            var age = 18;
+            var isStudent = true;
+            document.getElementById('result1').innerHTML =
+                name + "，年龄 " + age + "，是学生吗？" + isStudent;
+        }
+
+        // 2. let 演示
+        function demoLet() {
+            let score = 95;
+            let grade = 'A';
+            document.getElementById('result2').innerHTML =
+                "成绩: " + score + "，等级: " + grade;
+        }
+
+        // 3. const 演示
+        function demoConst() {
+            const PI = 3.14159;
+            const APP_NAME = "我的应用";
+            document.getElementById('result3').innerHTML =
+                PI + " 是圆周率，" + APP_NAME + " 是应用名称（常量不可修改）";
+        }
+
+        // 4. 变量命名演示
+        function demoNaming() {
+            var userName = "张三";    // 驼峰命名
+            var $price = 99.9;        // 可以用$
+            var _private = "私有";    // 可以用_
+            var user2 = "李四";       // 数字不能在开头
+
+            document.getElementById('result4').innerHTML =
+                "userName=" + userName + ", $price=" + $price +
+                ", _private=" + _private + ", user2=" + user2;
+        }
+    </script>
+</body>
+</html>

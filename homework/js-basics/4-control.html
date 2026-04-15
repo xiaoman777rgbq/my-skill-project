@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-流程控制</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #FF5722;
+            padding-bottom: 10px;
+        }
+        .section {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #FF5722;
+        }
+        .code {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        button {
+            background: #FF5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #E64A19;
+        }
+        .result {
+            background: #fff3e0;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #E65100;
+            min-height: 20px;
+        }
+        input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 5px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 JavaScript 流程控制</h1>
+
+        <div class="section">
+            <h3>1. if 条件语句</h3>
+            <div class="code">
+<pre>var score = 85;
+if (score >= 90) {
+    console.log("优秀");
+} else if (score >= 60) {
+    console.log("及格");
+} else {
+    console.log("不及格");
+}</pre>
+            </div>
+            <input type="number" id="scoreInput" value="85" min="0" max="100">
+            <button onclick="demoIf()">测试成绩</button>
+            <div class="result" id="r1"></div>
+        </div>
+
+        <div class="section">
+            <h3>2. switch 多分支语句</h3>
+            <div class="code">
+<pre>var day = 3;
+switch (day) {
+    case 1: console.log("星期一"); break;
+    case 2: console.log("星期二"); break;
+    case 3: console.log("星期三"); break;
+    default: console.log("其他");
+}</pre>
+            </div>
+            <input type="number" id="dayInput" value="3" min="1" max="7">
+            <button onclick="demoSwitch()">测试星期</button>
+            <div class="result" id="r2"></div>
+        </div>
+
+        <div class="section">
+            <h3>3. for 循环</h3>
+            <div class="code">
+<pre>// 输出 1-5 的平方
+for (var i = 1; i <= 5; i++) {
+    console.log(i + "的平方是 " + (i * i));
+}
+
+// 遍历数组
+var fruits = ["苹果", "香蕉", "橙子"];
+for (var i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}</pre>
+            </div>
+            <button onclick="demoFor()">运行循环</button>
+            <div class="result" id="r3"></div>
+        </div>
+
+        <div class="section">
+            <h3>4. while / do-while 循环</h3>
+            <div class="code">
+<pre>// while 循环
+var count = 1;
+while (count <= 3) {
+    console.log("while: " + count);
+    count++;
+}
+
+// do-while 循环（至少执行一次）
+var n = 1;
+do {
+    console.log("do-while: " + n);
+    n++;
+} while (n <= 3);</pre>
+            </div>
+            <button onclick="demoWhile()">运行循环</button>
+            <div class="result" id="r4"></div>
+        </div>
+
+        <div class="section">
+            <h3>5. for...in 和 for...of 循环</h3>
+            <div class="code">
+<pre>// for...in 遍历对象属性
+var person = {name: "小明", age: 20, city: "北京"};
+for (var key in person) {
+    console.log(key + ": " + person[key]);
+}
+
+// for...of 遍历数组元素（ES6）
+var colors = ["红", "绿", "蓝"];
+for (var color of colors) {
+    console.log(color);
+}</pre>
+            </div>
+            <button onclick="demoForInOf()">运行遍历</button>
+            <div class="result" id="r5"></div>
+        </div>
+
+        <div class="section">
+            <h3>6. break 和 continue</h3>
+            <div class="code">
+<pre>// break: 跳出整个循环
+for (var i = 1; i <= 5; i++) {
+    if (i === 3) break;
+    console.log("break at " + i);
+}
+
+// continue: 跳过当前迭代
+for (var j = 1; j <= 5; j++) {
+    if (j === 3) continue;
+    console.log("continue at " + j);
+}</pre>
+            </div>
+            <button onclick="demoBreakContinue()">运行</button>
+            <div class="result" id="r6"></div>
+        </div>
+    </div>
+
+    <script>
+        function demoIf() {
+            var score = parseInt(document.getElementById('scoreInput').value);
+            var result;
+            if (score >= 90) {
+                result = "成绩 " + score + " → 优秀！🎉";
+            } else if (score >= 60) {
+                result = "成绩 " + score + " → 及格 ✓";
+            } else {
+                result = "成绩 " + score + " → 不及格 ✗";
+            }
+            document.getElementById('r1').innerHTML = result;
+        }
+
+        function demoSwitch() {
+            var day = parseInt(document.getElementById('dayInput').value);
+            var dayName;
+            switch (day) {
+                case 1: dayName = "星期一"; break;
+                case 2: dayName = "星期二"; break;
+                case 3: dayName = "星期三"; break;
+                case 4: dayName = "星期四"; break;
+                case 5: dayName = "星期五"; break;
+                case 6: dayName = "星期六"; break;
+                case 7: dayName = "星期日"; break;
+                default: dayName = "无效输入";
+            }
+            document.getElementById('r2').innerHTML = "输入 " + day + " → " + dayName;
+        }
+
+        function demoFor() {
+            var output = [];
+            // 输出 1-5 的平方
+            for (var i = 1; i <= 5; i++) {
+                output.push(i + "的平方是 " + (i * i));
+            }
+            // 遍历数组
+            var fruits = ["苹果", "香蕉", "橙子"];
+            output.push("---");
+            for (var j = 0; j < fruits.length; j++) {
+                output.push("水果: " + fruits[j]);
+            }
+            document.getElementById('r3').innerHTML = output.join("<br>");
+        }
+
+        function demoWhile() {
+            var output = [];
+            // while 循环
+            var count = 1;
+            while (count <= 3) {
+                output.push("while: " + count);
+                count++;
+            }
+            output.push("---");
+            // do-while 循环
+            var n = 1;
+            do {
+                output.push("do-while: " + n);
+                n++;
+            } while (n <= 3);
+            document.getElementById('r4').innerHTML = output.join("<br>");
+        }
+
+        function demoForInOf() {
+            var output = [];
+            // for...in 遍历对象
+            var person = {name: "小明", age: 20, city: "北京"};
+            output.push("--- for...in 遍历对象 ---");
+            for (var key in person) {
+                output.push(key + ": " + person[key]);
+            }
+            // for...of 遍历数组
+            var colors = ["红", "绿", "蓝"];
+            output.push("--- for...of 遍历数组 ---");
+            for (var color of colors) {
+                output.push("颜色: " + color);
+            }
+            document.getElementById('r5').innerHTML = output.join("<br>");
+        }
+
+        function demoBreakContinue() {
+            var output = ["--- break 示例 ---"];
+            for (var i = 1; i <= 5; i++) {
+                if (i === 3) {
+                    output.push("遇到 " + i + "，跳出循环");
+                    break;
+                }
+                output.push("i = " + i);
+            }
+            output.push("--- continue 示例 ---");
+            for (var j = 1; j <= 5; j++) {
+                if (j === 3) {
+                    output.push("遇到 " + j + "，跳过");
+                    continue;
+                }
+                output.push("j = " + j);
+            }
+            document.getElementById('r6').innerHTML = output.join("<br>");
+        }
+    </script>
+</body>
+</html>

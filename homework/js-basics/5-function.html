@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-函数</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #009688;
+            padding-bottom: 10px;
+        }
+        .section {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #009688;
+        }
+        .code {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        button {
+            background: #009688;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #00796B;
+        }
+        .result {
+            background: #e0f2f1;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #004D40;
+            min-height: 20px;
+        }
+        .tip {
+            background: #fffde7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 JavaScript 函数</h1>
+
+        <div class="section">
+            <h3>1. 函数声明（function keyword）</h3>
+            <div class="code">
+<pre>// 基本语法
+function greet(name) {
+    return "你好，" + name + "！";
+}
+console.log(greet("小明"));
+
+// 带默认参数
+function sayHello(name = "世界") {
+    return "你好，" + name + "！";
+}</pre>
+            </div>
+            <button onclick="demoFunctionDecl()">运行</button>
+            <div class="result" id="r1"></div>
+        </div>
+
+        <div class="section">
+            <h3>2. 函数表达式</h3>
+            <div class="code">
+<pre>// 将函数赋值给变量
+var add = function(a, b) {
+    return a + b;
+};
+console.log(add(3, 5));  // 8
+
+// 箭头函数（ES6）
+var multiply = (a, b) => a * b;
+console.log(multiply(4, 5));  // 20</pre>
+            </div>
+            <button onclick="demoFunctionExpr()">运行</button>
+            <div class="result" id="r2"></div>
+        </div>
+
+        <div class="section">
+            <h3>3. 箭头函数（ES6）</h3>
+            <div class="code">
+<pre>// 无参数
+var greet = () => "你好！";
+
+// 单参数（可省略括号）
+var double = x => x * 2;
+
+// 多参数
+var sum = (a, b) => a + b;
+
+// 多行函数体
+var calc = (a, b) => {
+    var result = a * b;
+    return result;
+};</pre>
+            </div>
+            <button onclick="demoArrowFunc()">运行</button>
+            <div class="result" id="r3"></div>
+        </div>
+
+        <div class="section">
+            <h3>4. 函数参数</h3>
+            <div class="code">
+<pre>// arguments 对象（传统方式）
+function sumAll() {
+    var total = 0;
+    for (var i = 0; i < arguments.length; i++) {
+        total += arguments[i];
+    }
+    return total;
+}
+
+// rest 参数（ES6）
+function sumRest(...nums) {
+    return nums.reduce((a, b) => a + b, 0);
+}</pre>
+            </div>
+            <button onclick="demoParams()">运行</button>
+            <div class="result" id="r4"></div>
+        </div>
+
+        <div class="section">
+            <h3>5. 回调函数</h3>
+            <div class="code">
+<pre>// 回调函数示例
+function processData(data, callback) {
+    return callback(data);
+}
+
+var result = processData(5, function(x) {
+    return x * 2;
+});
+console.log(result);  // 10
+
+// 使用箭头函数的回调
+var numbers = [1, 2, 3, 4, 5];
+var doubled = numbers.map(x => x * 2);</pre>
+            </div>
+            <button onclick="demoCallback()">运行</button>
+            <div class="result" id="r5"></div>
+        </div>
+
+        <div class="section">
+            <h3>6. 闭包函数</h3>
+            <div class="code">
+<pre>// 闭包：函数访问外部变量
+function createCounter() {
+    var count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+var counter = createCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2
+console.log(counter());  // 3</pre>
+            </div>
+            <button onclick="demoClosure()">运行</button>
+            <div class="result" id="r6"></div>
+        </div>
+
+        <div class="section">
+            <h3>7. 递归函数</h3>
+            <div class="code">
+<pre>// 计算阶乘
+function factorial(n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+// 计算斐波那契数列
+function fibonacci(n) {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}</pre>
+            </div>
+            <button onclick="demoRecursive()">运行</button>
+            <div class="result" id="r7"></div>
+        </div>
+
+        <div class="tip">
+            <strong>💡 重要概念：</strong>
+            <ul>
+                <li><strong>函数声明</strong>：会被提升（hoisting），可以在声明前调用</li>
+                <li><strong>函数表达式</strong>：不会被提升，只有赋值后才能调用</li>
+                <li><strong>箭头函数</strong>：没有自己的 this，不能用作构造函数</li>
+                <li><strong>闭包</strong>：让函数记住创建时的作用域</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 1. 函数声明
+        function demoFunctionDecl() {
+            function greet(name) {
+                return "你好，" + name + "！";
+            }
+            function sayHello(name = "世界") {
+                return "你好，" + name + "！";
+            }
+            var results = [
+                greet("小明"),
+                greet("小红"),
+                sayHello(),
+                sayHello("张三")
+            ];
+            document.getElementById('r1').innerHTML = results.join("<br>");
+        }
+
+        // 2. 函数表达式
+        function demoFunctionExpr() {
+            var add = function(a, b) {
+                return a + b;
+            };
+            var multiply = (a, b) => a * b;
+            var results = [
+                "add(3, 5) = " + add(3, 5),
+                "multiply(4, 5) = " + multiply(4, 5)
+            ];
+            document.getElementById('r2').innerHTML = results.join("<br>");
+        }
+
+        // 3. 箭头函数
+        function demoArrowFunc() {
+            var greet = () => "你好！";
+            var double = x => x * 2;
+            var sum = (a, b) => a + b;
+            var calc = (a, b) => {
+                var result = a * b;
+                return result;
+            };
+            var results = [
+                "greet() = " + greet(),
+                "double(7) = " + double(7),
+                "sum(3, 8) = " + sum(3, 8),
+                "calc(4, 6) = " + calc(4, 6)
+            ];
+            document.getElementById('r3').innerHTML = results.join("<br>");
+        }
+
+        // 4. 参数
+        function demoParams() {
+            // arguments 对象
+            function sumAll() {
+                var total = 0;
+                for (var i = 0; i < arguments.length; i++) {
+                    total += arguments[i];
+                }
+                return total;
+            }
+            // rest 参数
+            function sumRest(...nums) {
+                return nums.reduce((a, b) => a + b, 0);
+            }
+            var results = [
+                "sumAll(1, 2, 3, 4, 5) = " + sumAll(1, 2, 3, 4, 5),
+                "sumRest(1, 2, 3, 4, 5) = " + sumRest(1, 2, 3, 4, 5)
+            ];
+            document.getElementById('r4').innerHTML = results.join("<br>");
+        }
+
+        // 5. 回调函数
+        function demoCallback() {
+            function processData(data, callback) {
+                return callback(data);
+            }
+            var doubled = processData(5, function(x) {
+                return x * 2;
+            });
+            var numbers = [1, 2, 3, 4, 5];
+            var mapResult = numbers.map(x => x * 2);
+            var results = [
+                "processData(5, x*2) = " + doubled,
+                "[1,2,3,4,5].map(x*2) = " + mapResult.join(", ")
+            ];
+            document.getElementById('r5').innerHTML = results.join("<br>");
+        }
+
+        // 6. 闭包
+        function demoClosure() {
+            function createCounter() {
+                var count = 0;
+                return function() {
+                    count++;
+                    return count;
+                };
+            }
+            var counter = createCounter();
+            var results = [
+                "counter() 第1次 = " + counter(),
+                "counter() 第2次 = " + counter(),
+                "counter() 第3次 = " + counter(),
+                "（count 被闭包记住，每次调用都+1）"
+            ];
+            document.getElementById('r6').innerHTML = results.join("<br>");
+        }
+
+        // 7. 递归
+        function demoRecursive() {
+            function factorial(n) {
+                if (n <= 1) return 1;
+                return n * factorial(n - 1);
+            }
+            function fibonacci(n) {
+                if (n <= 1) return n;
+                return fibonacci(n - 1) + fibonacci(n - 2);
+            }
+            var results = [];
+            for (var i = 1; i <= 6; i++) {
+                results.push(i + "! = " + factorial(i));
+            }
+            results.push("---");
+            for (var j = 0; j <= 7; j++) {
+                results.push("fibonacci(" + j + ") = " + fibonacci(j));
+            }
+            document.getElementById('r7').innerHTML = results.join("<br>");
+        }
+    </script>
+</body>
+</html>
