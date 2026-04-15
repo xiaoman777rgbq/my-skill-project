@@ -181,6 +181,95 @@ for (var j = 1; j <= 5; j++) {
             <button onclick="demoBreakContinue()">运行</button>
             <div class="result" id="r6"></div>
         </div>
+
+        <!-- ========== 练习题部分 ========== -->
+        <div style="margin-top: 40px; padding: 20px; background: #fff3e0; border-radius: 10px;">
+            <h2>📝 练习题</h2>
+            
+            <div class="section" style="border-left-color: #e65100;">
+                <h3>练习 1：找出数组中的最大值</h3>
+                <p><strong>题目：</strong>使用循环找出数组中的最大值</p>
+                <div class="code">
+<pre>var numbers = [34, 7, 23, 32, 5, 62];
+// 期望结果: 62</pre>
+                </div>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#e65100; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px; background:#fff8e1; padding:10px; border-radius:5px;">
+                        <p><strong>解题思路：</strong></p>
+                        <ol style="margin-left:20px;">
+                            <li>假设第一个元素是最大值</li>
+                            <li>遍历数组，与当前最大值比较</li>
+                            <li>如果比最大值大，就更新最大值</li>
+                        </ol>
+                        <div class="code">
+<pre>var numbers = [34, 7, 23, 32, 5, 62];
+var max = numbers[0];  // 假设第一个是最大值
+
+for (var i = 1; i < numbers.length; i++) {
+    if (numbers[i] > max) {
+        max = numbers[i];
+    }
+}
+console.log(max);  // 62</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exerciseFindMax()">运行解题</button>
+                <div class="result" id="ex1-result"></div>
+            </div>
+
+            <div class="section" style="border-left-color: #e65100;">
+                <h3>练习 2：斐波那契数列</h3>
+                <p><strong>题目：</strong>用循环打印斐波那契数列前10项</p>
+                <div class="code">
+<pre>// 斐波那契数列: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+// 规律: F(n) = F(n-1) + F(n-2)</pre>
+                </div>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#e65100; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px; background:#fff8e1; padding:10px; border-radius:5px;">
+                        <p><strong>解题思路：</strong></p>
+                        <ol style="margin-left:20px;">
+                            <li>前两项是 1, 1</li>
+                            <li>从第三项开始，每项等于前两项之和</li>
+                        </ol>
+                        <div class="code">
+<pre>var fib = [1, 1];
+for (var i = 2; i < 10; i++) {
+    fib[i] = fib[i-1] + fib[i-2];
+}
+console.log(fib.join(", "));
+// 输出: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exerciseFibonacci()">运行解题</button>
+                <div class="result" id="ex2-result"></div>
+            </div>
+
+            <div class="section" style="border-left-color: #e65100;">
+                <h3>练习 3：打印九九乘法表</h3>
+                <p><strong>题目：</strong>使用嵌套循环打印九九乘法表</p>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#e65100; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px; background:#fff8e1; padding:10px; border-radius:5px;">
+                        <p><strong>解题思路：</strong>双重循环，外层控制行，内层控制列</p>
+                        <div class="code">
+<pre>for (var i = 1; i <= 9; i++) {
+    var row = "";
+    for (var j = 1; j <= i; j++) {
+        row += j + "×" + i + "=" + (i*j) + "\t";
+    }
+    console.log(row);
+}</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exerciseMultiplyTable()">运行解题</button>
+                <div class="result" id="ex3-result"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -281,6 +370,55 @@ for (var j = 1; j <= 5; j++) {
                 output.push("j = " + j);
             }
             document.getElementById('r6').innerHTML = output.join("<br>");
+        }
+
+        // ========== 练习题函数 ==========
+        
+        // 练习1：找最大值
+        function exerciseFindMax() {
+            var numbers = [34, 7, 23, 32, 5, 62];
+            var max = numbers[0];
+            var steps = ["初始 max = " + max];
+            
+            for (var i = 1; i < numbers.length; i++) {
+                if (numbers[i] > max) {
+                    steps.push(numbers[i] + " > " + max + " → 更新 max = " + numbers[i]);
+                    max = numbers[i];
+                }
+            }
+            steps.push("---");
+            steps.push("最大值: " + max);
+            
+            document.getElementById('ex1-result').innerHTML = steps.join("<br>");
+        }
+
+        // 练习2：斐波那契数列
+        function exerciseFibonacci() {
+            var fib = [1, 1];
+            var steps = ["F(1) = 1", "F(2) = 1"];
+            
+            for (var i = 2; i < 10; i++) {
+                fib[i] = fib[i-1] + fib[i-2];
+                steps.push("F(" + (i+1) + ") = F(" + i + ") + F(" + (i-1) + ") = " + fib[i]);
+            }
+            steps.push("---");
+            steps.push("完整数列: " + fib.join(", "));
+            
+            document.getElementById('ex2-result').innerHTML = steps.join("<br>");
+        }
+
+        // 练习3：九九乘法表
+        function exerciseMultiplyTable() {
+            var output = [];
+            for (var i = 1; i <= 9; i++) {
+                var row = "";
+                for (var j = 1; j <= i; j++) {
+                    row += j + "×" + i + "=" + (i*j);
+                    if (j < i) row += "  ";
+                }
+                output.push(row);
+            }
+            document.getElementById('ex3-result').innerHTML = "<pre style='margin:0;'>" + output.join("\n") + "</pre>";
         }
     </script>
 </body>

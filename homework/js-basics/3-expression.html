@@ -166,6 +166,79 @@ console.log(--count2); // 5 (自减)</pre>
             <button onclick="demoIncrement()">运行</button>
             <div class="result" id="r7"></div>
         </div>
+
+        <!-- ========== 练习题部分 ========== -->
+        <div style="margin-top: 40px; padding: 20px; background: #f3e5f5; border-radius: 10px;">
+            <h2>📝 练习题</h2>
+            
+            <div class="section" style="border-left-color: #6a1b9a;">
+                <h3>练习 1：短路运算的实际应用</h3>
+                <p><strong>题目：</strong>使用短路运算实现：获取用户名称，如果为空则使用"匿名用户"</p>
+                <div class="code">
+<pre>// 传统写法
+function getName(name) {
+    if (name) {
+        return name;
+    } else {
+        return "匿名用户";
+    }
+}
+
+// 用短路运算简化？</pre>
+                </div>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#6a1b9a; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px; background:#f3e5f5; padding:10px; border-radius:5px;">
+                        <div class="code">
+<pre>// 方法1：|| 短路运算
+var userName = name || "匿名用户";
+
+// 方法2：?? 空值合并（ES2020）
+var userName = name ?? "匿名用户";
+
+// 区别：
+// || 会把 0、""、false 也视为假值
+// ?? 只把 null 和 undefined 视为假值
+var count = 0;
+count || "无"     // → "无"  ❌ 0被忽略
+count ?? "无"     // → 0     ✅ 正确</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exerciseShortCircuit()">验证短路运算</button>
+                <div class="result" id="ex1-result"></div>
+            </div>
+
+            <div class="section" style="border-left-color: #6a1b9a;">
+                <h3>练习 2：表达式求值</h3>
+                <p><strong>题目：</strong>计算以下表达式的结果</p>
+                <div class="code">
+<pre>var a = 5, b = 2, c = 3;
+3 + 4 * 2            // ⚠️ 注意运算顺序
+10 / 3               // ⚠️ 小数处理
+10 % 3               // ⚠️ 取余
+(a + b) * c           // ⚠️ 括号优先级
+a > 3 && b < 5        // ⚠️ 逻辑运算
+a === 5 ? "是5" : "不是5"</pre>
+                </div>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#6a1b9a; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px; background:#f3e5f5; padding:10px; border-radius:5px;">
+                        <div class="code">
+<pre>var a = 5, b = 2, c = 3;
+3 + 4 * 2      → 3 + 8 = 11    (先乘除后加减)
+10 / 3        → 3.333...       (保留小数)
+10 % 3        → 1              (取余数)
+(a + b) * c    → 7 * 3 = 21    (括号优先)
+a > 3 && b < 5 → true && true = true (逻辑与)
+a === 5 ? "是5" : "不是5" → "是5" (三元运算)</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exerciseEvaluate()">验证表达式</button>
+                <div class="result" id="ex2-result"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -250,6 +323,47 @@ console.log(--count2); // 5 (自减)</pre>
                 "--count 返回: " + (--count) + "，现在 count = " + count
             ];
             document.getElementById('r7').innerHTML = results.join("<br>");
+        }
+
+        // ========== 练习题函数 ==========
+        
+        // 练习1：短路运算
+        function exerciseShortCircuit() {
+            var results = [];
+            
+            // 测试 || 短路
+            var name1 = "小明";
+            var name2 = null;
+            var name3 = "";
+            var name4 = 0;
+            
+            results.push("--- || 短路运算 ---");
+            results.push('name1 = "小明" → name1 || "匿名" = ' + (name1 || "匿名"));
+            results.push('name2 = null → name2 || "匿名" = ' + (name2 || "匿名"));
+            results.push('name3 = "" → name3 || "匿名" = ' + (name3 || "匿名"));
+            results.push('name4 = 0 → name4 || "匿名" = ' + (name4 || "匿名") + " ← 0被忽略了！");
+            
+            // 测试 ?? 空值合并
+            results.push("--- ?? 空值合并（ES2020）---");
+            results.push('name1 = "小明" → name1 ?? "匿名" = ' + (name1 ?? "匿名"));
+            results.push('name2 = null → name2 ?? "匿名" = ' + (name2 ?? "匿名"));
+            results.push('name4 = 0 → name4 ?? "匿名" = ' + (name4 ?? "匿名") + " ← 0保留了！");
+            
+            document.getElementById('ex1-result').innerHTML = results.join("<br>");
+        }
+
+        // 练习2：表达式求值
+        function exerciseEvaluate() {
+            var a = 5, b = 2, c = 3;
+            var results = [
+                "3 + 4 * 2 = " + (3 + 4 * 2) + " (先乘除后加减)",
+                "10 / 3 = " + (10 / 3).toFixed(4) + " (保留4位小数)",
+                "10 % 3 = " + (10 % 3) + " (取余数)",
+                "(a + b) * c = " + ((a + b) * c) + " (括号优先)",
+                "a > 3 && b < 5 = " + (a > 3 && b < 5) + " (逻辑与)",
+                "a === 5 ? '是5' : '不是5' = " + (a === 5 ? "是5" : "不是5")
+            ];
+            document.getElementById('ex2-result').innerHTML = results.join("<br>");
         }
     </script>
 </body>

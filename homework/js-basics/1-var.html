@@ -116,6 +116,70 @@ var user2 = "李四";         // 数字不能在开头
             <button onclick="demoNaming()">运行示例</button>
             <div class="result" id="result4"></div>
         </div>
+
+        <!-- ========== 练习题部分 ========== -->
+        <div style="margin-top: 40px; padding: 20px; background: #e8f5e9; border-radius: 10px;">
+            <h2>📝 练习题</h2>
+            
+            <div class="example" style="border-left-color: #2e7d32;">
+                <h3>练习 1：交换两个变量的值</h3>
+                <p><strong>题目：</strong>不使用第三个变量，交换 a 和 b 的值</p>
+                <div class="code">
+<pre>// 初始值
+var a = 10;
+var b = 20;
+
+// 交换后：a = 20, b = 10</pre>
+                </div>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#2e7d32; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px;">
+                        <p><strong>解题思路：</strong>使用算术运算或解构赋值</p>
+                        <div class="code">
+<pre>// 方法1：算术运算
+a = a + b;  // a = 30
+b = a - b;  // b = 10
+a = a - b;  // a = 20
+
+// 方法2：解构赋值（ES6）
+[a, b] = [b, a];</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exercise1()">运行解题</button>
+                <div class="result" id="ex1-result"></div>
+            </div>
+
+            <div class="example" style="border-left-color: #2e7d32;">
+                <h3>练习 2：判断常量是否可以修改</h3>
+                <p><strong>题目：</strong>const 声明的对象属性可以修改吗？数组元素呢？</p>
+                <div class="code">
+<pre>const person = { name: "小明", age: 20 };
+const fruits = ["苹果", "香蕉"];
+
+// 能否执行以下操作？
+// person.age = 21;      // ❓
+// fruits.push("橙子");   // ❓</pre>
+                </div>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor:pointer; color:#2e7d32; font-weight:bold;">💡 答案提示（点击展开）</summary>
+                    <div style="margin-top:10px;">
+                        <p><strong>答案：</strong>都可以修改！const 保证的是<strong>引用不变</strong>，不是内容不变</p>
+                        <div class="code">
+<pre>const person = { name: "小明", age: 20 };
+person.age = 21;        // ✅ 可以
+person.city = "北京";   // ✅ 可以添加新属性
+
+const fruits = ["苹果", "香蕉"];
+fruits.push("橙子");    // ✅ 可以
+fruits = ["葡萄"];      // ❌ 错误！不能重新赋值</pre>
+                        </div>
+                    </div>
+                </details>
+                <button onclick="exercise2()">验证答案</button>
+                <div class="result" id="ex2-result"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -154,6 +218,56 @@ var user2 = "李四";         // 数字不能在开头
             document.getElementById('result4').innerHTML =
                 "userName=" + userName + ", $price=" + $price +
                 ", _private=" + _private + ", user2=" + user2;
+        }
+
+        // ========== 练习题函数 ==========
+        
+        // 练习1：交换变量
+        function exercise1() {
+            var a = 10, b = 20;
+            var steps = ["初始值: a = " + a + ", b = " + b];
+            
+            // 方法1：算术运算
+            a = a + b;  steps.push("a = a + b → a = " + a);
+            b = a - b;  steps.push("b = a - b → b = " + b);
+            a = a - b;  steps.push("a = a - b → a = " + a);
+            steps.push("---");
+            
+            // 方法2：解构赋值
+            var c = 10, d = 20;
+            steps.push("方法2 - 解构赋值:");
+            steps.push("初始值: c = " + c + ", d = " + d);
+            [c, d] = [d, c];
+            steps.push("[c, d] = [d, c] → c = " + c + ", d = " + d);
+            
+            document.getElementById('ex1-result').innerHTML = steps.join("<br>");
+        }
+
+        // 练习2：const 特性
+        function exercise2() {
+            const person = { name: "小明", age: 20 };
+            const fruits = ["苹果", "香蕉"];
+            
+            var results = [];
+            results.push("const person = { name: '小明', age: 20 }");
+            results.push("const fruits = ['苹果', '香蕉']");
+            results.push("---");
+            
+            // 修改属性
+            person.age = 21;
+            person.city = "北京";
+            results.push("✅ person.age = 21 成功");
+            results.push("✅ person.city = '北京' 成功（添加新属性）");
+            
+            // 修改数组
+            fruits.push("橙子");
+            results.push("✅ fruits.push('橙子') 成功");
+            
+            results.push("---");
+            results.push("结论：const 保证引用不变，不保证内容不变");
+            results.push("❌ 但 fruits = ['葡萄'] 会报错！");
+            
+            document.getElementById('ex2-result').innerHTML = results.join("<br>");
         }
     </script>
 </body>
